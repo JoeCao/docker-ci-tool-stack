@@ -3,6 +3,15 @@ version: '2'
 networks:
   prodnetwork:
     driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+      com.docker.network.bridge.enable_ip_masquerade: "true"
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.199.0/24
+        gateway: 192.168.199.1
+        dns: 119.29.29.29      
 
 services:
  nexus:
