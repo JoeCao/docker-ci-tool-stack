@@ -7,15 +7,15 @@
         <username>admin</username>
         <password>admin123</password>
       </server>
+      <server>
+        <id>nexus-snapshots</id>
+        <username>admin</username>
+        <password>admin123</password>
+      </server>
     </servers>
 
     <mirrors>
-      <mirror>
-        <!--This sends everything else to /public -->
-        <id>nexus</id>
-        <mirrorOf>*</mirrorOf>
-        <url>http://nexus:8081/nexus/content/groups/public</url>
-      </mirror>
+
     </mirrors>
 
     <profiles>
@@ -39,22 +39,25 @@
         <id>nexus</id>
         <!--Enable snapshots for the built in central repo to direct -->
         <!--all requests to nexus via the mirror -->
-        <repositories>
-          <repository>
-            <id>central</id>
-            <url>http://central</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>true</enabled></snapshots>
-          </repository>
-        </repositories>
        <pluginRepositories>
           <pluginRepository>
             <id>central</id>
-            <url>http://central</url>
+            <url>http://nexus:8081/nexus/content/groups/public</url>
             <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>true</enabled></snapshots>
+            <snapshots><enabled>false</enabled></snapshots>
+          </pluginRepository>
+          <pluginRepository>
+            <id>ofpay</id>
+            <url>http://nexus:8081/nexus/content/repositories/ofpay-releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
           </pluginRepository>
         </pluginRepositories>
+        <properties>
+          <git.username>root</git.username>
+          <git.password>12345678</git.password>
+        </properties>
       </profile>
     </profiles>
     <activeProfiles>
